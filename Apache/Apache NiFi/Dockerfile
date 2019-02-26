@@ -1,0 +1,5 @@
+FROM apache/nifi:latest	
+
+
+
+

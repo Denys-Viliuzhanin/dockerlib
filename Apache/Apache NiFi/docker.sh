@@ -5,11 +5,11 @@
 #############################
 
 # Project name
-PROJECT_NAME=javadev
+PROJECT_NAME="Apache Nifi"
 
 #Docker names
-DOCKER_IMAGE_NAME="$PROJECT_NAME-builder"
-DOCKER_CONTAINER_NAME="$PROJECT_NAME-builder"
+DOCKER_IMAGE_NAME="nifi-standalone"
+DOCKER_CONTAINER_NAME="nifi-standalone"
 
 #############################
 # Input Parameters
@@ -38,9 +38,10 @@ then
 fi
 
 case $TASK in
-init)
-	sudo docker build $SCRIPT_DIR -f "$SCRIPT_DIR/Dockerfile" --tag=$DOCKER_IMAGE_NAME
-	sudo docker run --name $DOCKER_CONTAINER_NAME -it $DOCKER_IMAGE_NAME 
+init)	
+	sudo docker build "$SCRIPT_DIR" -f "$SCRIPT_DIR/Dockerfile" --tag=$DOCKER_IMAGE_NAME
+	echo "=-----"
+	sudo docker run -p 8080:8080 --name $DOCKER_CONTAINER_NAME -it $DOCKER_IMAGE_NAME 
 	;;
 clear)
 	sudo docker container rm $DOCKER_CONTAINER_NAME 
