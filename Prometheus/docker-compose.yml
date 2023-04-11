@@ -6,6 +6,12 @@ services:
       - "9090:9090"
     volumes:
       - "./etc:/etc/prometheus"
+      - "./data:/prometheus"
+  alertmanager:
+    image: prom/alertmanager
+    ports:
+      - "9093:9093"
+
   pushgateway:
     image: prom/pushgateway:v1.4.3
     ports:

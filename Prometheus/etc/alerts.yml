@@ -1,0 +1,10 @@
+groups:
+- name: alert_metric_is_greater_than_zero
+  rules:
+  - alert: HighRequestLatency
+    expr: alert_metric > 0
+    for: 30s
+    labels:
+      severity: page
+    annotations:
+      summary: High request latency
