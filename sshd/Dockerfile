@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-
+ARG BUILD_NUMBER
 
 EXPOSE 22
 
@@ -14,11 +14,12 @@ RUN usermod -aG sudo user
 
 #Copy resources
 RUN mkdir /app
-COPY ./app/ /app/
+RUN mkdir /app/sshd
+COPY ./app/ /app/sshd/
 
 #Build number
-RUN BUILD_NUMBER=$(date +%Y%m%d%H%M%S)
-RUN echo "${BUILD_NUMBER}" >> /app/build_number.txt
+
+RUN echo ${BUILD_NUMBER} >> /app/sshd/build_number.txt
 
 # Configure SSH access for user
 RUN echo "\nPasswordAuthentication yes\n" >> file.txt
@@ -30,4 +31,4 @@ RUN echo "\nPermitRootLogin no\n" >> file.txt
 RUN sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 
 
-ENTRYPOINT ["/app/entry.sh"]
+ENTRYPOINT ["/app/sshd/entry.sh"]

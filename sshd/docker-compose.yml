@@ -2,8 +2,12 @@ version: '3'
 
 services:
   sshd:
-    build: .
+    build: 
+      context: .
+      args:
+        - BUILD_NUMBER=localbuild
     environment:
       USER_PASSWORD: userpwd
     ports:
       - "2222:22"
+    command: ["bash"]
