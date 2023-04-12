@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BUILD_NUMBER=$(</app/build_number.txt)
-echo "Build: ${BUILD_NUMBER}"
+echo "SSHD Image Build: ${BUILD_NUMBER}"
 
 ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
 
