@@ -1,3 +1,4 @@
 
 *.tar
 local.tfvars
+.env
