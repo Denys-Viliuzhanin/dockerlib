@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    build: 
+      context: .
+      args:
+        - BUILD_NUMBER=localbuild
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - "./temp/locks:/app/db/locks"
+    #ports:
+    #  - "2222:22"
+    #command: ["bash"]
+  db2:
+    image: mysql-db:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - "./temp/locks:/app/db/locks"
