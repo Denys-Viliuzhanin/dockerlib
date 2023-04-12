@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  sshd:
+    build: .
+    environment:
+      USER_PASSWORD: your_password
+    ports:
+      - "2222:22"
