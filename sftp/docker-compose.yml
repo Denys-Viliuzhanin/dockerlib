@@ -4,6 +4,6 @@ services:
   sshd:
     build: .
     environment:
-      USER_PASSWORD: your_password
+      USER_PASSWORD: userpwd
     ports:
       - "2222:22"
