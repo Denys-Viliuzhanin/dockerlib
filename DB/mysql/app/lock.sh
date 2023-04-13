@@ -1,11 +1,32 @@
 #!/bin/bash
 
-LOCK_FILE=$1
+ACTION=$1
+LOCK_FILE=$2
 
-while :
-do
+
+acuire () {
     TIMESTAMP=`date +%s`
 	echo ${TIMESTAMP} > ${LOCK_FILE}
-	sleep 1
-done
+}
 
+keeping() {
+  while :
+    do
+        acuire
+        sleep 1
+    done
+}
+
+case $ACTION in
+  acuire)
+    echo "Create lock: ${LOCK_FILE}"
+    acuire
+    ;;
+  keep)
+    echo "Keeping lock: ${LOCK_FILE}"
+    keeping
+    ;;
+  *)
+    echo -n "unknown"
+    ;;
+esac

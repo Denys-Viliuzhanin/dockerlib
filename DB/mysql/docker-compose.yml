@@ -10,10 +10,15 @@ services:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - "./temp/locks:/app/db/locks"
-    #ports:
-    #  - "2222:22"
-    #command: ["bash"]
+
   db2:
+    image: mysql-db:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - "./temp/locks:/app/db/locks"
+
+  db3:
     image: mysql-db:latest
     environment:
       MYSQL_ROOT_PASSWORD: password
