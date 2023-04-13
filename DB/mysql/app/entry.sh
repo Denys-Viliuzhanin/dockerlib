@@ -11,6 +11,12 @@ echo "Instance ${INSTANCE_ID}"
 
 ${SCRIPT_DIR}/try_lock.sh $SCRIPT_DIR/locks $INSTANCE_ID
 
-sleep 1
 
-/usr/local/bin/docker-entrypoint.sh mysqld
+
+if [ "$?" -eq 0 ]; then
+    echo "Exclusive lock is acuired so we can start a DB"
+    /usr/local/bin/docker-entrypoint.sh mysqld
+else 
+    echo "Exclusive lock isn't acuired so we can't start a DB"
+    exit 1
+fi

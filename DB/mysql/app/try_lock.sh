@@ -12,10 +12,12 @@ _term() {
 }
 trap _term SIGTERM
 
-HAS_LOCK=1
-while [[ $HAS_LOCK -eq 1  ]];  
+for ATTEMPT in {0..60}
 do
-    echo "Waiting until all lockes are realeased"
+
+#while [[ $HAS_LOCK -eq 1  ]];  
+#do
+    echo "Waiting until all lockes are realeased ($ATTEMPT attempt)"
     
     HAS_LOCK=0
     for OTHER_LOCK in ${LOCKS_FOLDER}/*.lock; do
@@ -65,6 +67,7 @@ do
     if [ "$HAS_LOCK" -eq 0 ]; then
         echo "Lock acuired".
         ${SCRIPT_DIR}/lock.sh keep ${LOCKS_FOLDER}/${INSTANCE_ID}.lock &
+        break
     else 
         sleep 1
     fi
@@ -72,6 +75,12 @@ do
 done
 
 
+
+if [ "$HAS_LOCK" -eq 0 ]; then
+    exit 0
+else 
+    exit 1
+fi
 
 
 
