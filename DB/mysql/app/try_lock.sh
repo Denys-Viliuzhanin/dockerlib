@@ -73,11 +73,11 @@ do
         echo "Locks are released"
 
         # Acquire new lock
-        echo "Acuiring lock...."
+        echo "Acquiring lock...."
         ${SCRIPT_DIR}/lock.sh acquire ${LOCKS_FOLDER}/${INSTANCE_ID}.lock 
 
 
-        sleep ${LOCK_REFRESH_INTERVAL:-5}
+        sleep ${RACE_CONDITION_WAIT_TIME:-30}
 
         CONCURRENT_LOCKS_COUNT=`ls -1 | wc -l`
 
