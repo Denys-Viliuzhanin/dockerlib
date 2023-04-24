@@ -10,6 +10,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - "./temp/locks:/app/db/locks"
+      - "./temp/data:/var/lib/mysql"
 
   db2:
     image: mysql-db:latest
@@ -17,6 +18,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - "./temp/locks:/app/db/locks"
+      - "./temp/data:/var/lib/mysql"
 
   db3:
     image: mysql-db:latest
@@ -24,3 +26,4 @@ services:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - "./temp/locks:/app/db/locks"
+      - "./temp/data:/var/lib/mysql"
