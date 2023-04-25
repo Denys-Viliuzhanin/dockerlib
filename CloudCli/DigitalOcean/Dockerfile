@@ -12,9 +12,20 @@ RUN ls /root/
 RUN tar xf /root/doctl-1.92.0-linux-amd64.tar.gz
 RUN mv /root/doctl /usr/local/bin
 
+
+# Install digitalocean-cli sceipts
+RUN mkdir /app
+RUN mkdir /app/digitalocean-cli
+
 # Copy tools
-COPY ./scripts/ /usr/local/bin/
-RUN chmod +x /usr/local/bin/*.sh
+COPY ./scripts/ /app/digitalocean-cli/
+RUN chmod +x /app/digitalocean-cli/*.sh
+
+#Initialize
+RUN /app/digitalocean-cli/digitalocean-cli-init.sh
+
+## /usr/local/bin/
+
 
 #Create user
 ARG UNAME=user
