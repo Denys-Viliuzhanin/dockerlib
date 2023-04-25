@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 #Install required software
 RUN  apt-get update \
-  && apt-get install -y wget
+  && apt-get install -y wget openssh-server nano
 
 # Install DigitalOcean CLI
 WORKDIR /root
