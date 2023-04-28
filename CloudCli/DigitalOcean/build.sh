@@ -6,5 +6,5 @@ docker build \
        --build-arg GID="$(id -g)" \
        -t digitalocean-cli:latest \
        --progress=plain \
-       . --no-cache 
+       . #--no-cache 
        
