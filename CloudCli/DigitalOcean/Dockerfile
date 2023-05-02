@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 #Install required software
 RUN  apt-get update \
-  && apt-get install -y wget openssh-server nano
+  && apt-get install -y wget openssh-server nano sudo curl
 
 # Install DigitalOcean CLI
 WORKDIR /root
@@ -19,7 +19,8 @@ RUN mkdir /app/digitalocean-cli
 
 # Copy tools
 COPY ./scripts/ /app/digitalocean-cli/
-RUN chmod +x /app/digitalocean-cli/*.sh
+RUN chmod +x -R /app/digitalocean-cli/*.sh
+RUN chmod +x -R /app/digitalocean-cli/utils/*.sh
 
 #Initialize
 RUN /app/digitalocean-cli/digitalocean-cli-init.sh

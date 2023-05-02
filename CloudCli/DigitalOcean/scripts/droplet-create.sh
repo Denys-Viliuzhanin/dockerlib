@@ -25,4 +25,4 @@ echo "Droplet: $DROPLET_NAME@$DROPLET_ID"
 
 
 #Forbit all incoming traffic
-#doctl compute firewall create --name "fr-$1-input-default-all-forbid" --droplet-ids "$DROPLET_ID" --inbound-rules="protocol:tcp,ports:all,address:0.0.0.0/0"
+doctl compute firewall create --name "fr-$1-in-frobid-all" --droplet-ids "$DROPLET_ID" --inbound-rules="protocol:tcp,ports:all"
