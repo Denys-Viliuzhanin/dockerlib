@@ -14,9 +14,19 @@ if [ ! -z "$DROPLET_ID" ]; then
   exit 1
 fi
 
+
+echo "Creating SSH keys...."
+
+ssh-key-create $1
+KEY_ID=$(ssh-key-id $1)
+
+
 echo "Creating $DROPLET_NAME...."
 # Create droplet
-doctl compute droplet create $DROPLET_NAME --image "$IMAGE" --size "$SIZE" --region "$REGION" #--format "ID" --no-header
+doctl compute droplet create $DROPLET_NAME --image "$IMAGE" \
+                                           --size "$SIZE" \
+                                           --region "$REGION" \
+                                           --ssh-keys "$KEY_ID"
 
 sleep 1
 
