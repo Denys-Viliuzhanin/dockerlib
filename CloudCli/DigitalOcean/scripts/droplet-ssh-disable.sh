@@ -1,7 +1,4 @@
 #!/bin/bash
 
 
-
-ID=$(firewall-id "fr-$1-in-allow-ssh")
-
-doctl compute firewall delete $ID
+firewall-delete "fr-$1-in-allow-ssh" 

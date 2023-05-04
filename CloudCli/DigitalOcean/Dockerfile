@@ -27,6 +27,8 @@ RUN /app/digitalocean-cli/digitalocean-cli-init.sh
 
 ## /usr/local/bin/
 
+# Sudo setup
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 #Create user
 ARG UNAME=user
@@ -35,11 +37,14 @@ ARG GID=1000
 
 RUN groupadd -g $GID -o $UNAME
 RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
+RUN usermod -aG sudo $UNAME
 USER $UNAME
 
 
 USER user
 
-WORKDIR /home/user
+RUN mkdir /home/user/workspace
 
-ENTRYPOINT [ "/bin/bash" ]
+WORKDIR /home/user/workspace
+
+ENTRYPOINT [ "digitalocean-cli-entry" ]
