@@ -19,14 +19,15 @@ echo "Creating SSH keys...."
 
 ssh-key-create $1
 KEY_ID=$(ssh-key-id $1)
-
+KEY_HASH=$(ssh-key-hash $KEY_ID)
+echo "Key fingerprint $KEY_HASH"
 
 echo "Creating $DROPLET_NAME...."
 # Create droplet
 doctl compute droplet create $DROPLET_NAME --image "$IMAGE" \
                                            --size "$SIZE" \
                                            --region "$REGION" \
-                                           --ssh-keys "$KEY_ID"
+                                           --ssh-keys "$KEY_HASH"
 
 sleep 1
 
