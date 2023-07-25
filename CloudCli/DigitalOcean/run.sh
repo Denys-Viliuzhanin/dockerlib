@@ -1,3 +1,5 @@
 #!/bin/bash
 
-docker run -ti digitalocean-cli
+docker run -ti \
+    -v "$(pwd)"/workspace:/workspace:z \
+    digitalocean-cli

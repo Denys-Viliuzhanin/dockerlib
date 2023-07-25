@@ -1,4 +1,4 @@
 #!/bin/bash
 
-curl ifconfig.me
+curl --silent ifconfig.me
 

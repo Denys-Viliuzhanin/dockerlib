@@ -2,7 +2,8 @@ FROM ubuntu:latest
 
 #Install required software
 RUN  apt-get update \
-  && apt-get install -y wget openssh-server nano sudo curl
+  && apt-get install -y wget openssh-server nano sudo curl \
+  && apt-get install -y zip
 
 # Install DigitalOcean CLI
 WORKDIR /root
@@ -21,6 +22,7 @@ RUN mkdir /app/digitalocean-cli
 COPY ./scripts/ /app/digitalocean-cli/
 RUN chmod +x -R /app/digitalocean-cli/*.sh
 RUN chmod +x -R /app/digitalocean-cli/utils/*.sh
+RUN chmod +x -R /app/digitalocean-cli/vault/*.sh
 
 #Initialize
 RUN /app/digitalocean-cli/digitalocean-cli-init.sh
@@ -38,13 +40,13 @@ ARG GID=1000
 RUN groupadd -g $GID -o $UNAME
 RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
 RUN usermod -aG sudo $UNAME
+
+RUN mkdir /workspace
+RUN chown $UNAME /workspace 
+RUN chmod a+rw /workspace
+
 USER $UNAME
 
-
-USER user
-
-RUN mkdir /home/user/workspace
-
-WORKDIR /home/user/workspace
+WORKDIR /workspace
 
 ENTRYPOINT [ "digitalocean-cli-entry" ]

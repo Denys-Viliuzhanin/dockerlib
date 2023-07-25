@@ -27,7 +27,9 @@ echo "Creating $DROPLET_NAME...."
 doctl compute droplet create $DROPLET_NAME --image "$IMAGE" \
                                            --size "$SIZE" \
                                            --region "$REGION" \
-                                           --ssh-keys "$KEY_HASH"
+                                           --ssh-keys "$KEY_HASH" \
+                                           --user-data "echo Test >> /root/test.txt" \
+                                           --user-data-file "./$1.setup.droplet.sh"
 
 sleep 1
 
